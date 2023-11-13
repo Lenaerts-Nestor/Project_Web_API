@@ -7,6 +7,8 @@ namespace WEB_API_PROJ
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IHeroData, HeroData>();
+            services.AddScoped<IFactionData, FactionData>();
+            services.AddScoped<IWeaponData, WeaponData>();
             services.AddControllers();
             services.AddSwaggerGen();
         }
