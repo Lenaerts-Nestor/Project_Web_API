@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WEB_API_PROJ.Entities;
 using WEB_API_PROJ.Services;
+using WEB_API_PROJ.VieuwModels;
 
 namespace WEB_API_PROJ.Controllers
 {
@@ -41,15 +42,26 @@ namespace WEB_API_PROJ.Controllers
 
         // POST: api/Hero
         [HttpPost]
-        public IActionResult Add([FromBody] Hero hero)
+        public IActionResult Add([FromBody] HeroCreateVieuwModel hero)
         {
-            var latestId = _heroData.GetAll().Max(h => h.Id) + 1;
+            //TODO: TESTEN DE ADD METHOD !! 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            hero.Id = latestId;
+            var newHero = new Hero
+            {
+                FirstName = hero.FirstName,
+                LastName = hero.LastName,
+                Age = hero.Age,
+                Specialication = hero.Specialisation,
+                Race = hero.Race
+            };
 
-            var newHero = _heroData.Add(hero);
+            newHero = _heroData.Add(newHero);
 
-            return CreatedAtAction("Get", new { id = newHero.Id }, newHero);
+            return CreatedAtAction(nameof(Get), new { id = newHero.Id }, newHero);
         }
 
         // PUT: api/Hero/1

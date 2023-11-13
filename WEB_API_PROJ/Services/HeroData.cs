@@ -4,11 +4,11 @@ namespace WEB_API_PROJ.Services
 {
     public class HeroData : IHeroData
     {
-        static List<Hero> heroes;
+        static List<Hero> _heroes;
 
         static HeroData()
         {
-            heroes = new List<Hero>
+            _heroes = new List<Hero>
             {
                 new Hero
                  {
@@ -78,34 +78,35 @@ namespace WEB_API_PROJ.Services
 
         public Hero Add(Hero newHero)
         {
-            heroes.Add(newHero);
+            newHero.Id = _heroes.Max(x => x.Id) + 1;
+            _heroes.Add(newHero);
 
             return newHero;
         }
 
         public void Delete(long id)
         {
-            var hero = heroes.Find(h => h.Id == id);
+            var hero = _heroes.Find(h => h.Id == id);
 
             if (hero != null)
             {
-                heroes.Remove(hero);
+                _heroes.Remove(hero);
             }
         }
 
         public Hero Get(long id)
         {
-            return heroes.Find(h => h.Id == id);
+            return _heroes.Find(h => h.Id == id);
         }
 
         public IEnumerable<Hero> GetAll()
         {
-            return heroes;
+            return _heroes;
         }
 
         public void Update(Hero newPerson)
         {
-            var hero = heroes.Find(h => h.Id == newPerson.Id);
+            var hero = _heroes.Find(h => h.Id == newPerson.Id);
 
             if (hero != null)
             {
