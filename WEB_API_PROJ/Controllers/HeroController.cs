@@ -28,7 +28,7 @@ namespace WEB_API_PROJ.Controllers
 
         // GET: api/Hero/1
         [HttpGet("{id}")]
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
             var hero = _heroData.Get(id);
 
@@ -64,9 +64,9 @@ namespace WEB_API_PROJ.Controllers
             return CreatedAtAction(nameof(Get), new { id = newHero.Id }, newHero);
         }
 
-        // PUT: api/Hero/1
+        //VOORBEELD VAN PUT/update: api/Hero/1
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Hero hero)
+        public IActionResult Update(int id, [FromBody] Hero hero)
         {
             if (id != hero.Id)
             {
@@ -78,7 +78,7 @@ namespace WEB_API_PROJ.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Hero/1
+        // VOORBEELD VAN DELETE: api/Hero/1
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
