@@ -45,7 +45,7 @@ This Web API project is built using ASP.NET Core, focusing on:
 
 ## API Endpoints
 
-The API likely includes:
+The API includes:
 
 - CRUD operations for Heroes, Factions, and Weapons
 - RESTful endpoints following best practices
